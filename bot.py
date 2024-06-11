@@ -7,58 +7,30 @@ import discord
 from discord import option
 from discord.ext import commands
 
+import files
+
 load_dotenv()
 
 intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix="$", intents=intents)
 
-def load_files():
-    global loaded_files
-
-    loaded_files = os.listdir("drive")
-    print(f"Loaded files:\n{loaded_files}")
-
-load_files()
-
-async def download_file(file: discord.Attachment) -> bytes:
-    async with aiohttp.ClientSession() as session:
-        async with session.get(file.url) as resp:
-            if resp.status == 200:
-                return await resp.read()
-            else:
-                return None
-
-async def save_file(filename: str, file_bytes: bytes):
-    async with aiofiles.open(f"drive/{filename}", "wb") as f:
-        await f.write(file_bytes)
-
 @bot.slash_command(name="add", description="Add a file to the drive")
 @option("file", discord.Attachment, description="File to add to the drive",)
 async def add_file(ctx: discord.ApplicationContext, file: discord.Attachment): 
-    file_bytes = await download_file(file)
+    file_bytes = await files.download_file(file)
     if file_bytes is not None:
-        await save_file(file.filename, file_bytes)
+        await files.save_file(file.filename, file_bytes)
         file_saved_reponse = await ctx.respond(f"Saved file: {file.filename}\nReloading file list...")
-        load_files()
+        files.load_files()
         await file_saved_reponse.edit_original_response(content=f"Saved file: {file.filename}\nFile list reloaded!")
     else:
         await ctx.respond(f"Failed to download file: {file.filename}")
 
-async def read_file(filename: str) -> str:
-    try:
-        async with aiofiles.open(f"drive/{filename}", "r") as f:
-            return await f.read()
-    except FileNotFoundError:
-        return None
-
-async def get_files(ctx: discord.AutocompleteContext) -> list:
-    return loaded_files
-
 @bot.slash_command(name="view", description="View a file from the drive, image files are displayed using an embed.")
-@option("file", description="File to view.", autocomplete=get_files)
+@option("file", description="File to view.", autocomplete=files.get_files)
 async def view_file(ctx: discord.ApplicationContext, file: str): 
-    file_content = await read_file(file)
+    file_content = await files.read_file(file)
 
     embed_title = f"Viewing file: {file}"
     
