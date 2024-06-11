@@ -1,3 +1,4 @@
 .venv/
+drive/
 .env
 testing.py
