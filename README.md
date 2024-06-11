@@ -6,5 +6,6 @@ Add, view, and manage files online using a Discord bot interface.
 
 1. [Pycord](https://pycord.dev/)
 2. [python-dotenv](https://github.com/theskumar/python-dotenv)
+3. [aiohttp](https://pypi.org/project/aiohttp/)
 
-Both requirements can be installed using `pip install py-cord python-dotenv`
+All requirements can be installed using `pip install py-cord python-dotenv aiohttp`
