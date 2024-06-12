@@ -30,16 +30,27 @@ async def add_file(ctx: discord.ApplicationContext, file: discord.Attachment):
 @bot.slash_command(name="view", description="View a file from the drive, image files are displayed using an embed.")
 @option("file", description="File to view.", autocomplete=files.get_files)
 async def view_file(ctx: discord.ApplicationContext, file: str): 
-    file_content = await files.read_file(file)
+    try:
+        file_content = await files.read_file(file)
 
-    embed_title = f"Viewing file: {file}"
-    
-    if len(file_content) > 4093:
-        embed_description = f"```{file_content[:4043]}\n[Message over 4096 characters, thus truncated]```"
-    else:
-        embed_description = f"```{file_content}```"
-    
-    await ctx.respond(embed=discord.Embed(title=embed_title, description=embed_description))
+        embed_title = f"Viewing file: {file}"
+        
+        if len(file_content) > 4093:
+            embed_description = f"```{file_content[:4043]}\n[Message over 4096 characters, thus truncated]```"
+        else:
+            embed_description = f"```{file_content}```"
+
+        await ctx.respond(embed=discord.Embed(title=embed_title, description=embed_description))
+
+    except UnicodeDecodeError:
+        image_file = discord.File(f"drive/{file}", filename=file)
+        
+        embed_title = f"Viewing image: {file}"
+        embed = discord.Embed(title=embed_title)
+        embed.set_image(url=f"attachment://{file}")
+
+        await ctx.respond(embed=embed, file=image_file)
+
 
 @bot.slash_command(name="remove")
 @option("file", description="File to remove")
