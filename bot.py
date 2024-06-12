@@ -58,7 +58,7 @@ async def view_file(ctx: discord.ApplicationContext, file: str):
 async def remove_file(ctx: discord.ApplicationContext, file: str): 
     await ctx.respond("Not implemented yet.")
 
-@bot.slash_command(name="list")
+@bot.slash_command(name="list", description="List all loaded drive files")
 async def list_files(ctx: discord.ApplicationContext):
     embed_title = "Current files stored in drive"
     embed_description = "\n".join(loaded_files)
