@@ -19,15 +19,19 @@ bot = commands.Bot(command_prefix="$", intents=intents)
 @option("file", discord.Attachment, description="File to add to the drive",)
 async def add_file(ctx: discord.ApplicationContext, file: discord.Attachment): 
     file_bytes = await files.download_file(file)
+    
     if file_bytes is not None:
         embed = discord.Embed(title=f"Saved file: `{file.filename}`",
                               description="Reloading file list...")
         await files.save_file(file.filename, file_bytes)
         file_saved_reponse = await ctx.respond(embed=embed)
+        
         files.load_files()
+        
         embed = discord.Embed(title=f"Saved file: `{file.filename}`",
                               description="File list reloaded!")
         await file_saved_reponse.edit_original_response(embed=embed)
+        
     else:
         embed = discord.Embed(title=f"Failed to download file: `{file.filename}`")
         await ctx.respond(embed=embed)
