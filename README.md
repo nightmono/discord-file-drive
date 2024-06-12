@@ -2,6 +2,18 @@
 
 Add, view, and manage files online using a Discord bot interface.
 
+## Commands
+
+`/add [file]` Adds a file
+
+`/view [file]` View a file, images are embedded, file is from a dropdown
+
+`/remove [file]` Remove a file, file is from a dropdown
+
+`/list` List all files
+
+`/hello` + `$hello` Returns bot latency
+
 ## Requirements
 
 1. [Pycord](https://pycord.dev/)
