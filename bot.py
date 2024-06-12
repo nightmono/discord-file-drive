@@ -20,14 +20,19 @@ bot = commands.Bot(command_prefix="$", intents=intents)
 async def add_file(ctx: discord.ApplicationContext, file: discord.Attachment): 
     file_bytes = await files.download_file(file)
     if file_bytes is not None:
+        embed = discord.Embed(title=f"Saved file: `{file.filename}`",
+                              description="Reloading file list...")
         await files.save_file(file.filename, file_bytes)
-        file_saved_reponse = await ctx.respond(f"Saved file: {file.filename}\nReloading file list...")
+        file_saved_reponse = await ctx.respond(embed=embed)
         files.load_files()
-        await file_saved_reponse.edit_original_response(content=f"Saved file: {file.filename}\nFile list reloaded!")
+        embed = discord.Embed(title=f"Saved file: `{file.filename}`",
+                              description="File list reloaded!")
+        await file_saved_reponse.edit_original_response(embed=embed)
     else:
-        await ctx.respond(f"Failed to download file: {file.filename}")
+        embed = discord.Embed(title=f"Failed to download file: `{file.filename}`")
+        await ctx.respond(embed=embed)
 
-@bot.slash_command(name="view", description="View a file from the drive, image files are displayed using an embed.")
+@bot.slash_command(name="view", description="View a file from the drive, image files are embeded")
 @option("file", description="File to view.", autocomplete=files.get_files)
 async def view_file(ctx: discord.ApplicationContext, file: str): 
     if file not in files.loaded_files:
@@ -38,7 +43,7 @@ async def view_file(ctx: discord.ApplicationContext, file: str):
     try:
         file_content = await files.read_file(file)
 
-        embed_title = f"Viewing file: {file}"
+        embed_title = f"Viewing file: `{file}`"
         
         if len(file_content) > 4093:
             embed_description = f"```{file_content[:4043]}\n[Message over 4096 characters, thus truncated]```"
@@ -52,7 +57,7 @@ async def view_file(ctx: discord.ApplicationContext, file: str):
     except UnicodeDecodeError:
         image_file = discord.File(f"drive/{file}", filename=file)
         
-        embed_title = f"Viewing image: {file}"
+        embed_title = f"Viewing image: `{file}`"
         embed = discord.Embed(title=embed_title)
         embed.set_image(url=f"attachment://{file}")
 
@@ -79,12 +84,16 @@ async def list_files(ctx: discord.ApplicationContext):
 
     await ctx.respond(embed=embed)
 
-@bot.slash_command(name="hello")
+@bot.slash_command(name="hello", description="Displays ping too")
 async def hello_slash_command(ctx: discord.ApplicationContext):
-    await ctx.respond("World!")
+    embed = discord.Embed(title="World!",
+                          description=f"Ping: {bot.latency}")
+    await ctx.respond(embed=embed)
 
 @bot.command(name="hello")
 async def hello_command(ctx: discord.ext.commands.Context):
-    await ctx.reply("World!")
+    embed = discord.Embed(title="World!",
+                          description=f"Ping: {bot.latency}")
+    await ctx.respond(embed=embed)
 
 bot.run(os.getenv("BOT_TOKEN"))
