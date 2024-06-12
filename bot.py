@@ -1,7 +1,5 @@
 import os
 from dotenv import load_dotenv
-import aiohttp
-import aiofiles
 
 import discord
 from discord import option
@@ -96,7 +94,7 @@ async def hello_slash_command(ctx: discord.ApplicationContext):
     await ctx.respond(embed=embed)
 
 @bot.command(name="hello")
-async def hello_command(ctx: discord.ext.commands.Context):
+async def hello_command(ctx: commands.Context):
     embed = discord.Embed(title="World!",
                           description=f"Ping: {bot.latency:.3f} ms")
     await ctx.reply(embed=embed)
