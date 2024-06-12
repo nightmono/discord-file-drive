@@ -58,8 +58,8 @@ async def view_file(ctx: discord.ApplicationContext, file: str):
 
         await ctx.respond(embed=embed, file=image_file)
 
-@bot.slash_command(name="remove")
-@option("file", description="File to remove")
+@bot.slash_command(name="remove", description="Remove a file from the drive")
+@option("file", description="File to remove", autocomplete=files.get_files)
 async def remove_file(ctx: discord.ApplicationContext, file: str): 
     if file not in files.loaded_files:
         embed = discord.Embed(title=f"File `{file}` not found")
