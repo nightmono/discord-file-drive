@@ -94,6 +94,6 @@ async def hello_slash_command(ctx: discord.ApplicationContext):
 async def hello_command(ctx: discord.ext.commands.Context):
     embed = discord.Embed(title="World!",
                           description=f"Ping: {bot.latency}")
-    await ctx.respond(embed=embed)
+    await ctx.reply(embed=embed)
 
 bot.run(os.getenv("BOT_TOKEN"))
