@@ -87,13 +87,13 @@ async def list_files(ctx: discord.ApplicationContext):
 @bot.slash_command(name="hello", description="Displays ping too")
 async def hello_slash_command(ctx: discord.ApplicationContext):
     embed = discord.Embed(title="World!",
-                          description=f"Ping: {bot.latency}")
+                          description=f"Ping: {bot.latency:.3f} ms")
     await ctx.respond(embed=embed)
 
 @bot.command(name="hello")
 async def hello_command(ctx: discord.ext.commands.Context):
     embed = discord.Embed(title="World!",
-                          description=f"Ping: {bot.latency}")
+                          description=f"Ping: {bot.latency:.3f} ms")
     await ctx.reply(embed=embed)
 
 bot.run(os.getenv("BOT_TOKEN"))
