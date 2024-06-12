@@ -68,7 +68,7 @@ async def remove_file(ctx: discord.ApplicationContext, file: str):
     
     os.remove(f"drive/{file}")
 
-    embed = discord.Embed(title=f"File `{file}` not found")
+    embed = discord.Embed(title=f"File `{file}` deleted")
     await ctx.respond(embed=embed)
 
 @bot.slash_command(name="list", description="List all loaded drive files")
