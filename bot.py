@@ -36,7 +36,7 @@ async def add_file(ctx: discord.ApplicationContext, file: discord.Attachment):
         embed = discord.Embed(title=f"Failed to download file: `{file.filename}`")
         await ctx.respond(embed=embed)
 
-@bot.slash_command(name="view", description="View a file from the drive, image files are embeded")
+@bot.slash_command(name="view", description="View a file from the drive, image files are embedded")
 @option("file", description="File to view.", autocomplete=files.get_files)
 async def view_file(ctx: discord.ApplicationContext, file: str): 
     if file not in files.loaded_files:
