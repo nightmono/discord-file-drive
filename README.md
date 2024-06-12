@@ -22,3 +22,8 @@ Add, view, and manage files online using a Discord bot interface.
 4. [aiofiles](https://pypi.org/project/aiofiles/)
 
 All requirements can be installed using `pip install py-cord python-dotenv aiohttp aiofiles`
+
+## TODO
+
+1. Emojis
+2. `/source/`. `/github`, `/code`, or similar command
