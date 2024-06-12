@@ -72,6 +72,7 @@ async def remove_file(ctx: discord.ApplicationContext, file: str):
         return
     
     os.remove(f"drive/{file}")
+    files.load_files()
 
     embed = discord.Embed(title=f"File `{file}` deleted")
     await ctx.respond(embed=embed)
