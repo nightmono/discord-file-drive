@@ -61,7 +61,15 @@ async def view_file(ctx: discord.ApplicationContext, file: str):
 @bot.slash_command(name="remove")
 @option("file", description="File to remove")
 async def remove_file(ctx: discord.ApplicationContext, file: str): 
-    await ctx.respond("Not implemented yet.")
+    if file not in files.loaded_files:
+        embed = discord.Embed(title=f"File `{file}` not found")
+        await ctx.respond(embed=embed)
+        return
+    
+    os.remove(f"drive/{file}")
+
+    embed = discord.Embed(title=f"File `{file}` not found")
+    await ctx.respond(embed=embed)
 
 @bot.slash_command(name="list", description="List all loaded drive files")
 async def list_files(ctx: discord.ApplicationContext):
