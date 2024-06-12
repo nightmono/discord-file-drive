@@ -40,7 +40,9 @@ async def view_file(ctx: discord.ApplicationContext, file: str):
         else:
             embed_description = f"```{file_content}```"
 
-        await ctx.respond(embed=discord.Embed(title=embed_title, description=embed_description))
+        embed = discord.Embed(title=embed_title, description=embed_description)
+
+        await ctx.respond(embed=embed)
 
     except UnicodeDecodeError:
         image_file = discord.File(f"drive/{file}", filename=file)
@@ -51,7 +53,6 @@ async def view_file(ctx: discord.ApplicationContext, file: str):
 
         await ctx.respond(embed=embed, file=image_file)
 
-
 @bot.slash_command(name="remove")
 @option("file", description="File to remove")
 async def remove_file(ctx: discord.ApplicationContext, file: str): 
@@ -59,7 +60,11 @@ async def remove_file(ctx: discord.ApplicationContext, file: str):
 
 @bot.slash_command(name="list")
 async def list_files(ctx: discord.ApplicationContext):
-    await ctx.respond("Not implemented yet.")
+    embed_title = "Current files stored in drive"
+    embed_description = "\n".join(loaded_files)
+    embed = discord.Embed(title=embed_title, description=embed_description)
+
+    await ctx.respond(embed=embed)
 
 @bot.slash_command(name="hello")
 async def hello_slash_command(ctx: discord.ApplicationContext):
