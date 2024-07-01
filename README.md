@@ -1,4 +1,4 @@
-# Discord File Drive
+# 🗃️ Discord File Drive
 
 Add, view, and manage files online using a Discord bot interface.
 
