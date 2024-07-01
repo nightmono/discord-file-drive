@@ -14,7 +14,11 @@ Add, view, and manage files online using a Discord bot interface.
 
 `/hello` + `$hello` Returns bot latency
 
-## Requirements
+## Installation
+
+### Requirements
+
+Make sure you have the following requirements:
 
 1. [Pycord](https://pycord.dev/)
 2. [python-dotenv](https://github.com/theskumar/python-dotenv)
@@ -22,6 +26,12 @@ Add, view, and manage files online using a Discord bot interface.
 4. [aiofiles](https://pypi.org/project/aiofiles/)
 
 All requirements can be installed using `pip install py-cord python-dotenv aiohttp aiofiles`
+
+### Setup
+
+Create a `.env` file. Inside the file, create the key `BOT_TOKEN` with the value of your bot token.
+
+Create a directory called `drive`. This is where all the drive files will be stored.
 
 ## TODO
 
