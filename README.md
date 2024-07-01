@@ -33,6 +33,10 @@ Create a `.env` file. Inside the file, create the key `BOT_TOKEN` with the value
 
 Create a directory called `drive`. This is where all the drive files will be stored.
 
+### Running
+
+To run the bot, run `python3 bot.py`.
+
 ## TODO
 
 1. Emojis
