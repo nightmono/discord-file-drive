@@ -3,3 +3,4 @@ drive/
 __pycache__/
 .env
 testing.py
+debug.log
