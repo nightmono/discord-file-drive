@@ -3,14 +3,24 @@
 import os
 import aiohttp
 import aiofiles
+import logging
 
 import discord
+
+logging.basicConfig(
+    level=logging.NOTSET,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.FileHandler("debug.log"),
+        logging.StreamHandler()
+    ]
+)
 
 def load_files():
     global loaded_files
 
     loaded_files = os.listdir("drive")
-    print(f"Loaded files:\n{loaded_files}")
+    logging.debug(f"Loaded files:\n{loaded_files}")
 
 load_files()
 
@@ -38,4 +48,4 @@ async def get_files(ctx: discord.AutocompleteContext) -> list:
 
 async def remove_file(filename: str):
     os.remove(f"drive/{filename}")
-    print(f"File {filename} removed")
+    logging.debug(f"File {filename} removed")
