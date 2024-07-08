@@ -39,6 +39,6 @@ To run the bot, run `python3 bot.py`.
 
 ## TODO
 
-1. Emojis
-2. `/source/`. `/github`, `/code`, or similar command
-3. Logging to both stdout and file
+- [ ] Emojis
+- [ ] `/source/`. `/github`, `/code`, or similar command
+- [ ] Logging to both stdout and file
