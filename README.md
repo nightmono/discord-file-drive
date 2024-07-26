@@ -44,6 +44,6 @@ To run the bot, run `python3 bot.py`.
 ## TODO
 
 - [ ] Emojis
-- [ ] `/source/`. `/github`, `/code`, or similar command
+- [x] `/source`. `/github`, `/code`, or similar command
 - [x] Logging to both stdout and file
 - [ ] Seperate drives for each user 

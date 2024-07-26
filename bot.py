@@ -105,6 +105,14 @@ async def list_files(ctx: discord.ApplicationContext):
 
     await ctx.respond(embed=embed)
 
+@bot.slash_command(name="github", description="Return the GitHub repo for this bot")
+async def github_slash_command(ctx: discord.ApplicationContext):
+    await ctx.respond("https://github.com/nightmono/discord-file-drive")
+
+@bot.command(name="github")
+async def github_command(ctx: commands.Context):
+    await ctx.reply("https://github.com/nightmono/discord-file-drive")
+
 @bot.slash_command(name="hello", description="Displays ping too")
 async def hello_slash_command(ctx: discord.ApplicationContext):
     embed = discord.Embed(title="World!",
