@@ -89,7 +89,7 @@ async def remove_file(ctx: discord.ApplicationContext, file: str):
 
     logs.debug(f"{ctx.author.name} ({ctx.author.id}) removed file {file}")
 
-    files.remove_file(file)
+    await files.remove_file(file)
     files.load_files()
 
     embed = discord.Embed(title=f"File `{file}` deleted")
