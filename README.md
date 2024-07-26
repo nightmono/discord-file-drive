@@ -14,6 +14,10 @@ Add, view, and manage files online using a Discord bot interface.
 
 `/hello` + `$hello` Returns bot latency
 
+## Features 
+
+- Logging on every file drive action, incluing user name, id, and their action
+
 ## Installation
 
 ### Requirements
@@ -42,3 +46,4 @@ To run the bot, run `python3 bot.py`.
 - [ ] Emojis
 - [ ] `/source/`. `/github`, `/code`, or similar command
 - [x] Logging to both stdout and file
+- [ ] Seperate drives for each user 
