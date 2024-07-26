@@ -40,4 +40,3 @@ async def get_files(ctx: discord.AutocompleteContext) -> list:
 
 async def remove_file(filename: str):
     os.remove(f"drive/{filename}")
-    logs.debug(f"File {filename} removed")
